@@ -1,6 +1,6 @@
 package org.example;
 
 public interface Shape {
-    public abstract double calculateArea();
-    public abstract double calculatePerimeter();
+    public abstract void calculateArea();
+    public abstract void calculatePerimeter();
 }

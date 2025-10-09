@@ -7,9 +7,11 @@ public class App {
 
     public static void main(String[] args) {
         Circle cir1 = new Circle(1);
-        double areaOfCir1 = cir1.calculateArea();
-        System.out.printf("Area of circle: %.3f%n", areaOfCir1);
-        double perimeterOfCir1 = cir1.calculatePerimeter();
-        System.out.printf("Perimeter of circle: %.3f%n", perimeterOfCir1);
+        cir1.calculateArea();
+        cir1.calculatePerimeter();
+
+        Rectangle rectangle = new Rectangle(2, 2);
+        rectangle.calculateArea();
+        rectangle.calculatePerimeter();
     }
 }
