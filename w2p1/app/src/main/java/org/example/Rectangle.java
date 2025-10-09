@@ -11,12 +11,12 @@ public class Rectangle implements Shape{
     @Override
     public void calculateArea() {
         double areaOfRectangle = length * width;
-        System.out.printf("Area of Rectangle: %.3f%n", areaOfRectangle);
+        System.out.printf("Area of Rectangle: %.2f%n", areaOfRectangle);
     }
 
     @Override
     public void calculatePerimeter() {
         double perimeterOfRectangle = 2 * (length + width);
-        System.out.printf("Perimeter of Rectangle: %.3f%n", perimeterOfRectangle);
+        System.out.printf("Perimeter of Rectangle: %.2f%n", perimeterOfRectangle);
     }
 }

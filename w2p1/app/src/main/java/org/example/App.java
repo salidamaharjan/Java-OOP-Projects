@@ -13,5 +13,9 @@ public class App {
         Rectangle rectangle = new Rectangle(2, 2);
         rectangle.calculateArea();
         rectangle.calculatePerimeter();
+
+        Triangle triangle = new Triangle(2,2,2,2);
+        triangle.calculateArea();
+        triangle.calculatePerimeter();
     }
 }
