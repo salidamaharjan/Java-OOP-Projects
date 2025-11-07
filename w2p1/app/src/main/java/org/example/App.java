@@ -10,25 +10,17 @@ import java.io.IOException;
 public class App {
 
     public static void main(String[] args) {
-        try (BufferedWriter file = new BufferedWriter(new FileWriter("shapeData.csv"))) {
-            file.write("Type Dimensions Area Parameter");
-            file.newLine();
-            Circle cir1 = new Circle(1);
-            cir1.calculateArea();
-            cir1.calculatePerimeter();
-            file.write("");
-
-        } catch (IOException e) {
-
-        }
-
-
-        Rectangle rectangle = new Rectangle(2, 2);
-        rectangle.calculateArea();
-        rectangle.calculatePerimeter();
-
-        Triangle triangle = new Triangle(2, 2, 2, 2);
-        triangle.calculateArea();
-        triangle.calculatePerimeter();
+        Circle circle = new Circle(3);
+        circle.calculateArea();
+        circle.calculatePerimeter();
+        circle.read();
+        circle.save();
+//        Rectangle rectangle = new Rectangle(2, 2);
+//        rectangle.calculateArea();
+//        rectangle.calculatePerimeter();
+//
+//        Triangle triangle = new Triangle(2, 2, 2, 2);
+//        triangle.calculateArea();
+//        triangle.calculatePerimeter();
     }
 }
