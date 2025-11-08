@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Circle implements Shape {
-    private double radius;
+    private final double radius;
     private double perimeter;
     private double area;
 

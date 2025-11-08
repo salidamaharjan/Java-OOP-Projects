@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Triangle implements Shape {
-    double base;
-    double height;
-    double a;
-    double c;
-    double area;
-    double perimeter;
+    private final double base;
+    private final double height;
+    private final double a;
+    private final double c;
+    private double area;
+    private double perimeter;
 
     public Triangle(double base, double height, double a, double c) {
         this.base = base;
