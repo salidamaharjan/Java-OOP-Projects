@@ -9,6 +9,8 @@ build
 # From https://github.com/github/gitignore/blob/master/Gradle.gitignore
 .gradle
 /build/
+.idea/
+.DS_Store
 
 # Ignore Gradle GUI config
 gradle-app.setting
