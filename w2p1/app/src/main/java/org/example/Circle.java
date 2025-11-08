@@ -30,7 +30,7 @@ public class Circle implements Shape {
     @Override
     public Shape read() {
         try {
-            final List<String> lines = Files.readAllLines(Path.of("shape.csv"));
+            final List<String> lines = Files.readAllLines(Path.of("circle.csv"));
             for(int i = 0; i < lines.size(); i++) {
                 final String line  = lines.get(i);
                 String[] values = line.split(",");
@@ -46,8 +46,8 @@ public class Circle implements Shape {
 
     @Override
     public void save() {
-        try(final FileWriter writer = new FileWriter("shape.csv")){
-            writer.write("%s,%.3f,%.3f,%.3f".formatted("CIRCLE", this.radius, this.area, this.perimeter));
+        try(final FileWriter writer = new FileWriter("circle.csv")){
+            writer.write("Shape: %s, Radius: %.3f, Area: %.3f, Perimeter: %.3f".formatted("CIRCLE", this.radius, this.area, this.perimeter));
         } catch(IOException e) {
             System.out.println(e);
         }

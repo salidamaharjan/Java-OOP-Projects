@@ -3,10 +3,6 @@
  */
 package org.example;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class App {
 
     public static void main(String[] args) {
@@ -19,8 +15,10 @@ public class App {
 //        rectangle.calculateArea();
 //        rectangle.calculatePerimeter();
 //
-//        Triangle triangle = new Triangle(2, 2, 2, 2);
-//        triangle.calculateArea();
-//        triangle.calculatePerimeter();
+        Triangle triangle = new Triangle(2, 2, 2, 2);
+        triangle.calculateArea();
+        triangle.calculatePerimeter();
+        triangle.read();
+        triangle.save();
     }
 }
