@@ -3,12 +3,136 @@
  */
 package org.example;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Scanner;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        try (Scanner scnr = new Scanner(System.in)) {
+            TaskManager taskManager = TaskManager.getInstance();
+            loadFile();
+            String option = printMenu(scnr);
+            while (!option.equals("4")) {
+                switch (option) {
+                    case "1":
+                        askUserInputAndAddTask(scnr);
+                        break;
+                    case "2":
+                        viewAllTask();
+                        break;
+                    case "3":
+                        markTaskComplete(scnr, taskManager);
+                        break;
+                }
+                option = printMenu(scnr);
+            }
+            readTasks();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void markTaskComplete(Scanner scnr, TaskManager taskManager) {
+        viewAllTask();
+        System.out.print("Which task did you complete: ");
+        int id = Integer.parseInt(scnr.next());
+
+        taskManager.markTaskCompleted(id);
+        saveToFile();
+    }
+
+
+    public static void viewAllTask() {
+        readTasks();
+    }
+
+    public static void askUserInputAndAddTask(Scanner scnr) throws IOException {
+        scnr.nextLine();
+
+        System.out.print("Enter Description: ");
+        String description = scnr.nextLine();
+
+        System.out.print("Enter Priority (LOW, MEDIUM, HIGH): ");
+        Priority priority = Priority.valueOf(scnr.next().toUpperCase());
+        scnr.nextLine();
+
+        System.out.print("Enter Due Date: ");
+        String dueDate = scnr.nextLine();
+
+        System.out.print("Enter Status (PENDING, COMPLETED, PROGRESS): ");
+        Status status = Status.valueOf(scnr.next().toUpperCase());
+
+        TaskManager taskManager = TaskManager.getInstance();
+        taskManager.addTask(description, priority, dueDate, status);
+
+        saveToFile();
+        System.out.println("Task Added");
+    }
+
+
+    public static String printMenu(Scanner scnr) {
+        System.out.println("Select from options: ");
+        System.out.println("1. Add Task");
+        System.out.println("2. View Tasks");
+        System.out.println("3. Mark Task Complete");
+        System.out.println("4. Exit");
+
+        System.out.print("Your choice (1, 2, 3, 4): ");
+        return scnr.next();
+    }
+
+    public static void loadFile() {
+        TaskManager taskManager = TaskManager.getInstance();
+        taskManager.clear();
+
+        try {
+            List<String> lines = Files.readAllLines(Path.of("task.csv"));
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                taskManager.addTask(
+                        parts[1],
+                        Priority.valueOf(parts[2]),
+                        parts[3],
+                        Status.valueOf(parts[4])
+                );
+            }
+        } catch (IOException e) {
+            System.out.println("Could not load tasks.");
+        }
+    }
+
+    public static void saveToFile() {
+        TaskManager taskManager = TaskManager.getInstance();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("task.csv", false))) {
+            for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+                Task t = taskManager.getTaskList().get(i);
+                writer.write((i + 1) + "," + t.getDescription() + "," + t.getPriority()
+                        + "," + t.getDueDate() + "," + t.getStatus());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Could not save file.");
+        }
+    }
+
+
+    public static void readTasks() {
+        try {
+            List<String> lines = Files.readAllLines(Path.of("task.csv"));
+            System.out.println("\n--- Saved Tasks from CSV ---");
+            for (String line : lines) {
+                String[] valueReadFromFile = line.split(",");
+                System.out.println(valueReadFromFile[0] + ". " + "Task Name: " + valueReadFromFile[1] + ", Priority: " + valueReadFromFile[2] + ", Due Date: " + valueReadFromFile[3] + ", Status: " + valueReadFromFile[4]);
+            }
+        } catch (IOException e) {
+            System.out.println("Could not read task file.");
+        }
     }
 }
