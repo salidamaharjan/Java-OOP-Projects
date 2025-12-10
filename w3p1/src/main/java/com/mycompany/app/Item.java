@@ -8,6 +8,7 @@ public class Item {
         this.itemName = name;
         this.itemPrice = price;
     }
+
     public void setItemName(String name) {
         this.itemName = name;
     }

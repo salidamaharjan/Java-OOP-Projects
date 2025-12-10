@@ -11,20 +11,47 @@ public class ItemMenu {
         this.itemList = new ArrayList<>();
     }
 
+    public void viewMenu() {
+
+        System.out.println("\nMenu Items⬇️");
+
+        if (itemList.isEmpty()) {
+            System.out.println("-->Nothing in the Menu<--");
+        }
+
+        for (int i = 0; i < itemList.size(); i++) {
+            System.out.println((i + 1) + ". " + itemList.get(i).getItemName().toUpperCase() + " $" + itemList.get(i).getItemPrice());
+        }
+    }
+
+    public void changePrice(String itemName, Double changedPrice) {
+        for (int i = 0; i < itemList.size(); i++) {
+
+            if (itemList.get(i).getItemName().equalsIgnoreCase(itemName)) {
+                itemList.get(i).setItemPrice(changedPrice);
+                System.out.println("\n-->Price for " + itemName.toUpperCase() + " changed to $" + changedPrice + "<--");
+            }
+
+        }
+    }
+
     public void addItemToMenu(Item item) {
+
         itemList.add(item);
-        System.out.println("Item " + item.getItemName() + " added to menu.");
+        System.out.println("\n-->Item: " + item.getItemName().toUpperCase() + " added to menu<--");
+
     }
 
     public void removeItemFromMenu(String itemName) {
         Iterator<Item> iteratorList = itemList.iterator();
 
-        while(iteratorList.hasNext()){
-           Item nextItem = iteratorList.next();
-           if(nextItem.getItemName().equalsIgnoreCase(itemName)){
-               iteratorList.remove();
-               System.out.println("Item: " + nextItem.getItemName() + " removed from menu.");
-           }
+        while (iteratorList.hasNext()) {
+            Item nextItem = iteratorList.next();
+
+            if (nextItem.getItemName().equalsIgnoreCase(itemName)) {
+                iteratorList.remove();
+                System.out.println("\n-->Item: " + nextItem.getItemName().toUpperCase() + " removed from menu<--");
+            }
         }
     }
 }
