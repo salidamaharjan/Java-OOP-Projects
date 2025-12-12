@@ -6,9 +6,18 @@ import java.util.List;
 
 public class ItemMenu {
     private List<Item> itemList;
+    private static ItemMenu itemMenu = null;
 
     public ItemMenu() {
         this.itemList = new ArrayList<>();
+    }
+
+    public static ItemMenu getInstance() {
+
+        if( itemMenu == null)
+            itemMenu = new ItemMenu();
+
+        return itemMenu;
     }
 
     public void viewMenu() {
@@ -26,10 +35,12 @@ public class ItemMenu {
 
     public void changePrice(String itemName, Double changedPrice) {
         for (int i = 0; i < itemList.size(); i++) {
-
             if (itemList.get(i).getItemName().equalsIgnoreCase(itemName)) {
                 itemList.get(i).setItemPrice(changedPrice);
                 System.out.println("\n-->Price for " + itemName.toUpperCase() + " changed to $" + changedPrice + "<--");
+            } else {
+                System.out.println("\n-->Invalid Item, Enter the name of Item<--");
+                return;
             }
 
         }

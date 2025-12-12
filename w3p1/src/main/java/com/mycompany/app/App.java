@@ -1,8 +1,5 @@
 package com.mycompany.app;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class App {
@@ -21,6 +18,9 @@ public class App {
         return scnr.nextInt();
     }
 
+    public static void loadMenuFile(){
+
+    }
     public static void main(String[] args) {
         
         Scanner scnr = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class App {
 
                 case 4:
                     menu.viewMenu();
-                    System.out.print("Which Item you want to update the price?: ");
+                    System.out.print("\nWhich Item you want to update the price?: ");
                     String itemToModify = scnr.next();
                     System.out.print("Change price: ");
                     Double changedPrice = scnr.nextDouble();
