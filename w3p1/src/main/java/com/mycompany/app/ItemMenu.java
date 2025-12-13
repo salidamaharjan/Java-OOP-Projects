@@ -14,10 +14,14 @@ public class ItemMenu {
 
     public static ItemMenu getInstance() {
 
-        if( itemMenu == null)
+        if (itemMenu == null)
             itemMenu = new ItemMenu();
 
         return itemMenu;
+    }
+
+    public List<Item> getItemList() {
+        return this.itemList;
     }
 
     public void viewMenu() {
@@ -49,8 +53,6 @@ public class ItemMenu {
     public void addItemToMenu(Item item) {
 
         itemList.add(item);
-        System.out.println("\n-->Item: " + item.getItemName().toUpperCase() + " added to menu<--");
-
     }
 
     public void removeItemFromMenu(String itemName) {
