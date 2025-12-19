@@ -64,6 +64,9 @@ public class App {
         try {
             List<String> lines = Files.readAllLines(Path.of("menu.csv"));
             System.out.println("\n---Menu from CSV ---");
+            if (lines.isEmpty()) {
+                System.out.println("-->Nothing in the Menu<--");
+            }
             for (String line : lines) {
                 String[] valueReadFromFile = line.split(",");
                 System.out.println(valueReadFromFile[0] + ". " + "Item Name: " + valueReadFromFile[1] + ", Item Price: " + valueReadFromFile[2]);
@@ -80,6 +83,8 @@ public class App {
         Scanner scnr = new Scanner(System.in);
         ItemMenu menu = ItemMenu.getInstance();
 
+        loadMenuFile();
+
         Integer userChoiceTodo = whatToDo();
 
         while (userChoiceTodo != 5) {
@@ -87,7 +92,6 @@ public class App {
             switch (userChoiceTodo) {
 
                 case 1:
-                    loadMenuFile();
                     readItemsFromMenuFile();
                     userChoiceTodo = whatToDo();
                     break;
@@ -105,20 +109,24 @@ public class App {
                     break;
 
                 case 3:
-                    menu.viewMenu();
+                    readItemsFromMenuFile();
                     System.out.print("\nEnter the name of the item to remove: ");
                     String nameOfItem = scnr.next();
                     menu.removeItemFromMenu(nameOfItem);
+                    System.out.println("\n-->Item: " + nameOfItem.toUpperCase() + " removed from menu<--");
+                    saveToMenuFile();
                     userChoiceTodo = whatToDo();
                     break;
 
                 case 4:
-                    menu.viewMenu();
+                    readItemsFromMenuFile();
                     System.out.print("\nWhich Item you want to update the price?: ");
                     String itemToModify = scnr.next();
                     System.out.print("Change price: ");
                     Double changedPrice = scnr.nextDouble();
                     menu.changePrice(itemToModify, changedPrice);
+                    System.out.println("\n-->Price for " + itemToModify.toUpperCase() + " changed to $" + changedPrice + "<--");
+                    saveToMenuFile();
                     userChoiceTodo = whatToDo();
                     break;
 

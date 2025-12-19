@@ -24,24 +24,23 @@ public class ItemMenu {
         return this.itemList;
     }
 
-    public void viewMenu() {
-
-        System.out.println("\nMenu Items⬇️");
-
-        if (itemList.isEmpty()) {
-            System.out.println("-->Nothing in the Menu<--");
-        }
-
-        for (int i = 0; i < itemList.size(); i++) {
-            System.out.println((i + 1) + ". " + itemList.get(i).getItemName().toUpperCase() + " $" + itemList.get(i).getItemPrice());
-        }
-    }
+//    public void viewMenu() {
+//
+//        System.out.println("\nMenu Items⬇️");
+//
+//        if (itemList.isEmpty()) {
+//            System.out.println("-->Nothing in the Menu<--");
+//        }
+//
+//        for (int i = 0; i < itemList.size(); i++) {
+//            System.out.println((i + 1) + ". " + itemList.get(i).getItemName().toUpperCase() + " $" + itemList.get(i).getItemPrice());
+//        }
+//    }
 
     public void changePrice(String itemName, Double changedPrice) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getItemName().equalsIgnoreCase(itemName)) {
                 itemList.get(i).setItemPrice(changedPrice);
-                System.out.println("\n-->Price for " + itemName.toUpperCase() + " changed to $" + changedPrice + "<--");
             } else {
                 System.out.println("\n-->Invalid Item, Enter the name of Item<--");
                 return;
@@ -63,7 +62,6 @@ public class ItemMenu {
 
             if (nextItem.getItemName().equalsIgnoreCase(itemName)) {
                 iteratorList.remove();
-                System.out.println("\n-->Item: " + nextItem.getItemName().toUpperCase() + " removed from menu<--");
             }
         }
     }
