@@ -9,6 +9,7 @@ public class App {
     public static Map<String, Integer> wordCount() {
         Map<String, Integer> wordCountMap;
         wordCountMap = readFile("/Users/salida/code/JavaOOP-Project/w3p2/src/main/java/com/mycompany/app/App.java");
+//        wordCountMap = readFile("menu.csv");
         return wordCountMap;
     }
 
@@ -21,9 +22,7 @@ public class App {
                 String data = fileReader.nextLine().trim().strip().toLowerCase();
                 String[] words = data.split(" ");
                 for (String word : words) {
-                    System.out.println("in for: " + word);
                     String strippedWord = stringTrim(word);
-                    System.out.println("in for: stripped word " + strippedWord);
 
                     Integer count = wordCountMap.get(strippedWord);
                     if (count == null) {
@@ -42,9 +41,15 @@ public class App {
     public static String stringTrim(String word) {
         String[] wordSplit = word.split("");
         StringBuilder stripTrimWord = new StringBuilder();
-        for (String s : wordSplit) {
-            if (!s.matches(".*[^A-Za-z0-9 ].*") && !s.matches(".*\\p{Punct}.*")) {
-                stripTrimWord.append(s);
+//        for (String s : wordSplit) {
+//            if (!s.matches(".*[^A-Za-z0-9 ].*") && !s.matches(".*\\p{Punct}.*")) {
+//                stripTrimWord.append(s);
+//            }
+//        }
+        for(int i = 0; i < word.length(); i++) {
+            int character = word.charAt(i);
+            if((character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z')) {
+                stripTrimWord.append(word.charAt(i));
             }
         }
         System.out.println(stripTrimWord);
