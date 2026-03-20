@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - "POSTGRES_DB=w4p1"
+      - "POSTGRES_PASSWORD=password"
+      - "POSTGRES_USER=root"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./docker/__docker_volume__/postgres:/var/lib/postgresql"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d w4p1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgweb:
+    image: "sosedoff/pgweb:latest"
+    ports:
+      - "5050:8081"
+    environment:
+      - "PGWEB_DATABASE_URL=postgres://root:password@postgres:5432/w4p1?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy
