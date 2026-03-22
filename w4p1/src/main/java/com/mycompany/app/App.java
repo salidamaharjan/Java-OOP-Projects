@@ -15,7 +15,7 @@ public class App {
         try(Connection conn = DriverManager.getConnection(url,user,password)){
             // Add student to the DB
 //            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO student (name, major) VALUES (?, ?)");
-//            preparedStatement.setString(1, "Aman");
+//            preparedStatement.setString(1, "ABC");
 //            preparedStatement.setString(2, "MCS" );
 //            preparedStatement.executeUpdate();
 //            System.out.println("Student added");
@@ -39,6 +39,12 @@ public class App {
             }
             resultSet2.close();
             preparedStatement2.close();
+            // update the db
+            PreparedStatement preparedStatement3 = conn.prepareStatement("UPDATE student Set name = ? WHERE name = ?");
+            preparedStatement3.setString(1, "XYZ");
+            preparedStatement3.setString(2, "ABC");
+            preparedStatement3.executeUpdate();
+            System.out.println("Name updated.");
         }catch(Exception e){
             System.err.println("Connection failed!");
             System.err.println("Error: " + e.getMessage());
