@@ -45,6 +45,13 @@ public class App {
             preparedStatement3.setString(2, "ABC");
             preparedStatement3.executeUpdate();
             System.out.println("Name updated.");
+            preparedStatement3.close();
+            // DELETE student from DB
+            PreparedStatement preparedStatement4 = conn.prepareStatement("DELETE FROM student WHERE name = ?");
+            preparedStatement4.setString(1, "XYZ");
+            preparedStatement4.executeUpdate();
+            System.out.println("Student Deleted.");
+            preparedStatement4.close();
         }catch(Exception e){
             System.err.println("Connection failed!");
             System.err.println("Error: " + e.getMessage());
