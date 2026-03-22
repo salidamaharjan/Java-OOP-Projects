@@ -20,7 +20,8 @@ public class App {
 //            preparedStatement.executeUpdate();
 //            System.out.println("Student added");
 //            preparedStatement.close();
-            PreparedStatement preparedStatement1 = conn.prepareStatement("Select * FROM student");
+            // View all Student's name
+            PreparedStatement preparedStatement1 = conn.prepareStatement("SELECT * FROM student");
             ResultSet resultSet = preparedStatement1.executeQuery();
             System.out.println("Name of Students ↓");
             while(resultSet.next()){
@@ -29,6 +30,15 @@ public class App {
             }
             resultSet.close();
             preparedStatement1.close();
+            // Get student by id
+            PreparedStatement preparedStatement2 = conn.prepareStatement("SELECT name From student where id = ?");
+            preparedStatement2.setInt(1, 1);
+            ResultSet resultSet2 = preparedStatement2.executeQuery();
+            while(resultSet2.next()){
+                System.out.println("Student with id 1: " + resultSet2.getString("name"));
+            }
+            resultSet2.close();
+            preparedStatement2.close();
         }catch(Exception e){
             System.err.println("Connection failed!");
             System.err.println("Error: " + e.getMessage());
